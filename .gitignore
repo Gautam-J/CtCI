@@ -1,0 +1,8 @@
+.DS_STORE
+
+bin/
+
+input
+output
+input.txt
+output.txt
