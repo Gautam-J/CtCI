@@ -71,12 +71,36 @@ void printList(Node* head) {
 void solve() {
     // Algorithm:
     // ==========
+    // We iterate through the list and keep track of seen data using a set.
+    // If we encounter a duplicate, we can simply point the next of prev to next node.
     //
-    //
-    // Time: O()
-    // Space: O()
+    // Time: O(n)  n is number of elements in list
+    // Space: O(n)  n is number of elements in list
 
-    cout << "Hello, world!" << nl;
+    int n, t;
+    cin >> n;
+
+    Node* head = nullptr;
+    for (int i = 0; i < n; ++i) {
+        cin >> t;
+        insertAtEnd(head, t);
+    }
+
+    uset<int> seen;
+    Node* curr = head, *prev = nullptr;
+
+    while (curr) {
+        // if already in set, break the connection
+        if (seen.find(curr->data) != seen.end()) {
+            prev->next = curr->next;
+        } else {
+            seen.insert(curr->data);
+            prev = curr;
+        }
+        curr = curr->next;
+    }
+
+    printList(head);
 }
 
 int main() {
