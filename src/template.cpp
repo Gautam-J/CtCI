@@ -41,6 +41,7 @@ const char nl = '\n';
 
 void solve() {
     // Algorithm:
+    // ==========
     //
     //
     // Time: O()
