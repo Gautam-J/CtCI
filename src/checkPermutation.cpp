@@ -41,29 +41,36 @@ const char nl = '\n';
 
 void solve() {
     // Algorithm:
-    // If len(str) > size of possible set of characters,
-    // then no coz there will be repetitions.
-    // Create a flag for each character and check if already seen or not.
+    // Assume 128 chars.
+    //
+    // If string lengths are not equal, then they are not a permutation of each other.
+    // Create an array of size 128 to store the freq of chars of first str.
+    // Iterate through the second str and decrement the freq of chars.
+    // If any freq < 0, return false
+    //
+    // Here, the array is used more like a hashmap.
     //
     // Time: O(n)  where n is length of string
-    // Space: O(1)  or size of set of possible chars
+    // Space: O(1)  or size of possible set of chars
 
-    string s;
-    cin >> s;
+    string s1, s2;
+    cin >> s1 >> s2;
 
-    if (sz(s) > 128) {  // Assuming 128 different ASCII characters possible.
+    if (sz(s1) != sz(s2)) {
         cout << "NO" << nl;
         return;
     }
 
-    bitset<128> seen;  // 1 bit for storing whether each char is already seen or not
-    trav(c, s) {
-        if (seen.test(c)) {  // if already seen, i.e., bit value 1 at pos ascii of char
+    int freq[128] = { 0 };
+    trav(c, s1)
+        freq[(int)c]++;
+
+    trav(c, s2) {
+        freq[(int)c]--;
+        if (freq[(int)c] < 0) {
             cout << "NO" << nl;
             return;
         }
-
-        seen.set(c);
     }
 
     cout << "YES" << nl;
